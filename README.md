@@ -4,6 +4,10 @@ An end-to-end, reproducible MLOps project for binary heart-disease risk classifi
 
 ## Quick start
 
+The combined raw dataset is included in `data/raw/`. Its source and the steps for
+recreating the cleaned dataset and EDA outputs are documented in
+[`data/README.md`](data/README.md).
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
@@ -26,6 +30,13 @@ curl -X POST http://localhost:8000/predict -H 'Content-Type: application/json' -
 ```
 
 The service exposes `GET /health`, `GET /metrics`, and `POST /predict`.
+For a sample inference request after starting the API:
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H 'Content-Type: application/json' \
+  -d @examples/request.json
+```
 
 ## Container and Kubernetes deployment
 
@@ -40,6 +51,13 @@ kubectl -n heart-ml port-forward service/heart-disease-api 8000:80
 
 For a public cloud deployment, replace the image in `k8s/deployment.yaml` with an image pushed to Docker Hub, GHCR, or the cloud registry, then configure an Ingress or cloud load balancer. See `docs/deployment-and-demo.md` for exact verification and screenshot/video checklist.
 
+## Assignment deliverables and evidence
+
+- The final written report is [`Heart_Disease_MLOps_Assignment_Report.docx`](Heart_Disease_MLOps_Assignment_Report.docx); its generator lays out ten intended pages.
+- Screenshots are not included yet. Capture the requested run evidence and save it under [`screenshots/`](screenshots/), following its README.
+- No public API endpoint has been deployed. Use the local API instructions above; cloud deployment prerequisites and verification are in [`docs/deployment-and-demo.md`](docs/deployment-and-demo.md).
+- Record the pipeline walkthrough yourself; the recording outline and suggested output path are in [`docs/deployment-and-demo.md`](docs/deployment-and-demo.md).
+
 ## Project structure
 
 ```text
@@ -48,6 +66,7 @@ src/heart_ml/       Reusable preparation, training, and API code
 tests/              Unit tests
 models/             Serialized selected pipeline and metadata after training
 reports/            EDA/model figures and metrics after training
+screenshots/        Instructions for adding submission evidence
 .github/workflows/  CI pipeline
 k8s/                Kubernetes deployment manifests
 monitoring/         Prometheus scrape configuration

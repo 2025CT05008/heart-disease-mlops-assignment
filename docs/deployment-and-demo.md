@@ -1,5 +1,16 @@
 # Deployment and Demo Evidence
 
+## Current submission status
+
+- A public API URL has not been deployed. The API is ready for local testing at
+  `http://localhost:8000` using the README quick-start instructions.
+- The repository contains the report and automated EDA/model figures. Capture
+  the live-run screenshots below; do not present placeholder images as run
+  evidence.
+- Record the 3-5 minute video below after running the pipeline. Save the final
+  recording as `video/pipeline-demo.mp4` (or include an accessible video link
+  with the submission).
+
 ## Local container proof
 
 1. Run `docker compose up --build`.
@@ -16,4 +27,16 @@
 
 ## Short video structure
 
-Keep the recording to 3-5 minutes: show the repository structure, run tests, show MLflow runs, demonstrate the Docker API request, show Prometheus metrics, then show Kubernetes resources. Narrate the role of the fitted preprocessing pipeline and why it prevents training-serving skew.
+Keep the recording to 3-5 minutes:
+
+1. Introduce the repository and dataset preparation.
+2. Run the unit tests and show the EDA/training output and MLflow runs.
+3. Demonstrate a sample request to the Dockerized API.
+4. Show Prometheus metrics and, if Kubernetes is available, the deployed
+   resources.
+5. Explain that the fitted preprocessing pipeline is shared between training
+   and serving to reduce training-serving skew.
+
+If a cloud endpoint is unavailable, explicitly demonstrate the local endpoint
+and mention that no public service is deployed. Do not claim cloud deployment
+without a reachable endpoint and corresponding evidence.
