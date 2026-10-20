@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-and-training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: ruff check src tests scripts
+      - run: pytest -q
+      - run: python scripts/prepare_data.py
+      - run: python -m heart_ml.train --data data/cleaned/heart_disease_cleaned.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-and-reports
+          path: |
+            models/
+            reports/
+            mlruns/
+
+  docker-build:
+    needs: quality-and-training
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python scripts/prepare_data.py && python -m heart_ml.train --data data/cleaned/heart_disease_cleaned.csv
+      - run: docker build -t heart-disease-api:ci .

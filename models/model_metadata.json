@@ -1,0 +1,28 @@
+{
+  "selected_model": "random_forest",
+  "holdout_metrics": {
+    "accuracy": 0.8369565217391305,
+    "precision": 0.8333333333333334,
+    "recall": 0.8823529411764706,
+    "roc_auc": 0.9291009086561454,
+    "cv_accuracy_mean": 0.8071336642765214,
+    "cv_precision_mean": 0.8176209563493959,
+    "cv_recall_mean": 0.8451671183378501,
+    "cv_roc_auc_mean": 0.8764434912673394
+  },
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ]
+}
