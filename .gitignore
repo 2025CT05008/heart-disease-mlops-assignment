@@ -6,3 +6,4 @@ mlruns/
 models/*.joblib
 reports/figures/*.png
 reports/metrics.json
+~$*.docx
